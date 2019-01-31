@@ -15,19 +15,36 @@ knitr::opts_chunk$set(echo = TRUE)
   Should someone rent or buy a home?  This is of course going to vary by financial situation and location but there are some general ideas that apply across different locations and this project will give some general advice for the cities on the list of required metropolitan areas for the Springboard Career Track. 
   
 ###The Audience
-  The information in this project will be intended for other Springboard students who live in, or are intending to move to, the cities on the list of approved metropolitan areas on the Springboard Career Track. 
+  The information in this project will be intended for other Springboard 
+  students who live in, or are intending to move to, the cities on the 
+  list of approved metropolitan areas on the Springboard Career Track. 
   
-  The decision about whether or not to buy a home and when to do so is quite important and can be frightening, especially to first time buyers.  This project will be able to provide some data and some advice to people looking at real estate in different metropolitan areas. 
+  The decision about whether or not to buy a home and when to do so is 
+  quite important and can be frightening, especially to first time buyers.  
+  This project will be able to provide some data and some advice to people 
+  looking at real estate in different metropolitan areas. 
   
 ###The Data
-I will be focusing primarily on two different data sets with more to possibly come if these datasets prove insufficient. Both current datasets were taken from Kaggle.
+I will be focusing primarily on two different data sets with more to 
+possibly come if these datasets prove insufficient. Both current datasets 
+were taken from Kaggle.
 
 1. [Zillow Economics Data](https://www.kaggle.com/zillow/zecon/home)
 2. [Insightful & Vast USA Statistics by Golden Oak Research Group](https://www.kaggle.com/goldenoakresearch/us-acs-mortgage-equity-loans-rent-statistics)
 
 ###Outline of Current Plan
-Use linear regression models to plot the rise in property value and rent costs across different cities over time to see how prices have risen over time and how rapidly they have risen. Also included in the second dataset by Golden Oak Research Group is statistics on what level of income is associated with only spending certain percentages of your income on housing related expenses. I will compare these numbers to the data on student outcomes from Springboard to see if owning a home is recommended or realistic depending on the area being studied. 
+Use linear regression models to plot the rise in property value and rent 
+costs across different cities over time to see how prices have risen over 
+time and how rapidly they have risen. Also included in the second dataset 
+by Golden Oak Research Group is statistics on what level of income is 
+associated with only spending certain percentages of your income on 
+housing related expenses. I will compare these numbers to the data on 
+student outcomes from Springboard to see if owning a home is recommended 
+or realistic depending on the area being studied. 
 
 ###Deliverables
-All code used to complete this project, along with a slideshow and a YouTube video discussing my findings, methodology, limitations for this project and further questions. 
+
+All code used to complete this project, along with a slideshow and a 
+YouTube video discussing my findings, methodology, limitations for this 
+project and further questions. 
 
