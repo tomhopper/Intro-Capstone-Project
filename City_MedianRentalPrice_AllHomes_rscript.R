@@ -38,13 +38,17 @@ ggplot(data = rent_df, aes(y = chicago)) + geom_point()
 #Getting the error x must be a numberic vetor or matrix, going to try to amke a matrix
 #and then see what happens
 dotchart(x = rent_df)
+#An attempt to make as.numeric not chop off zeroes
 options(digits = 15)
 #I can't figure out a way to get as.numeric to stop chopping off zeroes. It's rather
 #frustrating. 
 chicago_matrix <- as.numeric(rent_df$Chicago, digits = 8)
-
+#This creates a plot but since as.numeric chops off a bunch of zeroes the graph does
+#not work
 plot(chicago_matrix)
-plot(as.xts(rent_df$Chicago))
+#Everything after this is attempting to make graphing a time series work. 
+#I have yet to make a single fully functioning graph.
+plot.xts(rent_df)
 chicago_no_na <- na.omit(rent_df[,1:18]) 
 plot.xts(chicago_no_na, y = chicago)
 typeof(rent_df$Chicago)
