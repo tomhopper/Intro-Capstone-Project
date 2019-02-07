@@ -34,7 +34,7 @@ rent_tibble4 <- rent_tibble3[-c(1,2,3,4), ]
 
 rent_df <- as.data.frame(rent_tibble4)
 #running into a lot of problems trying to graph the time series charts.  
-ggplot(data = rent_df, aes(y = chicago)) + geom_point()
+ggplot(data = rent_df, aes(x = chicago)) + geom_point()
 #Getting the error x must be a numberic vetor or matrix, going to try to amke a matrix
 #and then see what happens
 dotchart(x = rent_df)
@@ -47,7 +47,7 @@ chicago_matrix <- as.numeric(rent_df$Chicago, digits = 8)
 #not work
 plot(chicago_matrix)
 #Everything after this is attempting to make graphing a time series work. 
-#I have yet to make a single fully functioning graph.
+#I have yet to make a single fully functioning graph that represents what I want it to.
 plot.xts(rent_df)
 chicago_no_na <- na.omit(rent_df[,1:18]) 
 plot.xts(chicago_no_na, y = chicago)
