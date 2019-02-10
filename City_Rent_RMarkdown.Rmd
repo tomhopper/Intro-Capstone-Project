@@ -1,0 +1,102 @@
+---
+title: "City_Rent_Markdown"
+author: "Thomas Friss"
+date: "February 9, 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## City Rent R Markdown document
+Here are the packages I have loaded from the library and the first dataset that I import into the script. The CSV file contains median rents over time for different cities across the US
+
+
+
+
+```{r}
+library(dplyr)
+library(ggplot2)
+library(tidyverse)
+full_rent_df <- read.csv("City_MedianRentalPrice_AllHomes.csv", stringsAsFactors =FALSE)
+```
+
+After this I created a vector that had the names of the cities I wanted to analyze. This list does not include New York City because there is no single New York City in this dataset but a metropolitan area called New York. 
+
+```{r}
+city_list <- c("San Francisco","Boston", "Chicago","Los Angeles", "Washington",
+               "Seattle","Atlanta", "Austin", "Raleigh", "Durham", "Philadelphia",
+               "Dallas", "Denver", "Detroit", "Minneapolis", "Saint Paul", "San Diego",
+               "Houston")
+```
+
+Here is what I used to find the areas in the New York metropolitan area.  I do not know why I had to use grepl or even if I did but I remember grep not working properly and I am still not entirely sure why. I saved this into a different object and will rbind() it to another dataframe later. 
+```{r}
+new_york_rent <- full_rent_df %>% filter(grepl("New York", full_rent_df$Metro))
+```
+Finding which rows in the dataset match the cities I want to look at. 
+
+```{r}
+rent_tibble <- full_rent_df %>% filter(RegionName  %in% city_list)
+```
+
+Turns out there are multiple cities with the name Washington in this dataset so I looked at the dataset, saw the last 2 rows were results I did not want and removed them. `r rent_tibble <- rent_tibble[1:18, ]`
+
+
+After this I want to combine the New York rows with the rows from the other cities 
+
+`r rent_tibble2 <- rent_tibble %>% rbind(new_york_rent)`
+
+Next is a series of code provided by Blaine Bateman, a mentor at Springboard. This was in response to me having difficulties with creating graphs to visualize my data. 
+
+I will copy the instructors description of his code because he can explain it better then I can. 
+
+ The following uses:
+
+1) filter to get Chicago, then
+
+2) the select is from dplyr to choose columns, and I take advantage of the fact that the years are all 20xx,
+
+3) using the colnames() function to get the names, the
+
+4) substr() function to get the 2nd & 3rd characters,
+
+5) and the == "20" to choose only those that have the years in them. 
+
+6) The t() function is "transpose", which converts from a row to a column,
+
+7) as.data.frame() is handy to keep some functions happy that don't like matrices etc.,
+
+8) rename() puts a name on the column so it is easier to use later in ggplot, using 
+
+9) names(.) to refer to the current (empty) column names,
+
+10) and the mutate creates an x-value (time) using just the row number (the row() function) as a sequence of quarter numbers. 
+
+```{r}
+ chicago_ts <-
+    full_rent_df %>%
+    filter(substr(RegionName, 1, 7) == "Chicago") %>%
+    select(which(substr(colnames(.), 2, 3) == "20")) %>%
+    t(.) %>%
+    as.data.frame() %>%
+    rename(rent = names(.)[1]) %>%
+    mutate(time_qtr = row(.))
+```
+ 
+Next I did some modeling and visualization. 
+
+For some of the statistical graphs I am still not entirely sure what all of them mean but I will have to look them up in the future. 
+
+
+
+```{r}
+chicago_lm <-lm(rent~time_qtr, data = chicago_ts)
+plot(chicago_lm)
+summary(chicago_lm)
+
+ggplot(chicago_ts, aes(x = time_qtr, y = rent)) + geom_point()+
+stat_smooth(method = "lm", col = "blue")
+```
+
